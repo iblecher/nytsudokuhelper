@@ -16,7 +16,10 @@
 
     "content_scripts": [{
         "js": [ "content.js" ],
-        "matches": ["*://www.nytimes.com/puzzles/sudoku/*"]
+        "matches": [
+            "*://www.nytimes.com/puzzles/sudoku",
+            "*://www.nytimes.com/puzzles/sudoku/*"
+        ]
     }],
 
     "permissions": [ "activeTab", "scripting" ]

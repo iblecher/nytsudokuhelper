@@ -98,14 +98,20 @@ function queueAddAutoFillButton() {
     }, 250);
 }
 
-window.addEventListener("DOMContentLoaded", queueAddAutoFillButton);
-window.addEventListener("readystatechange", queueAddAutoFillButton);
-window.addEventListener("popstate", queueAddAutoFillButton);
-window.addEventListener("load", () => {
-    queueAddAutoFillButton();
-    const wrapperNode = document.querySelector(".pz-game-wrapper");
-    if (wrapperNode !== null) {
-        const mutationObserver = new MutationObserver(queueAddAutoFillButton);
-        mutationObserver.observe(wrapperNode, {childList: true, subtree: true});
-    }
+window.addEventListener("load", queueAddAutoFillButton);
+
+console.log('Sodoku Autofill Extention Loaded')
+
+const observer = new MutationObserver(mutations => {
+    mutations.forEach((mutation) => {
+        const nodes = Array.from(mutation.addedNodes);
+        const elementAdded = nodes.some(node => node.classList && node.classList.contains('su-keyboard'));
+                
+        if (elementAdded) {
+            queueAddAutoFillButton();
+            observer.disconnect();
+        }
+    });
 });
+
+observer.observe(document.body, { childList: true, attributes: true, characterData: true, subtree: true });
