@@ -54,9 +54,9 @@ function markCells() {
 }
 
 function turnOnCandidates() {
-    const candidatesCheckbox = document.querySelector(("[name='lightenComplete']"))
+    const candidatesCheckbox = document.querySelector((".su-keyboard__checkbox"))
     if (!candidatesCheckbox.checked) {
-        candidatesCheckbox.parentNode.click();
+        candidatesCheckbox.click();
     }
 }
 
